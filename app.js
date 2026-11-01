@@ -9,7 +9,13 @@
 "use strict";
 
 const CONFIG = {
-  sectionOrder: [],                 // optional preferred section order; others follow as found in data
+  sectionOrder: [
+  "English", "Ancient History", "Medieval History", "Modern History",
+  "West Bengal Specific", "Indian Geography", "Physical & World Geography",
+  "Arts & Culture", "Indian Polity", "Indian Economy", "Physics", "Chemistry",
+  "Biology", "Static GK", "Current Affairs", "Aptitude & Mental Ability"],    
+   // optional preferred section order; others follow as found in data
+   
   defaultMarks: { correct: 1, wrong: 0.25 },
   defaultDurationMin: 60,
   dailyGoal: 25,                    // questions per day
