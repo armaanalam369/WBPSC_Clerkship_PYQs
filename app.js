@@ -238,7 +238,7 @@ function renderDashboard() {
   }).join("");
 
   $("dashboard-body").innerHTML = `
-    <div class="hero"><div><h1>Clerkship PYQs, paper by paper</h1><p>Sit a full paper under exam conditions, drill one section, or work through the questions you keep missing.</p>
+    <div class="hero"><div><h1>Clerkship Previous Year Question Papers</h1><p>Sit a full paper under exam conditions, drill one section, or work through the questions you keep missing.</p>
       <div class="badges">${badgeDefs().map(b => `<span class="badge ${b.ok ? "on" : ""}" title="${esc(b.desc)}">${esc(b.name)}</span>`).join("")}</div></div>
       <div class="goal"><p>Today's goal</p><b>${todayN} / ${goal}</b> <span>questions</span><div class="bar"><i style="width:${Math.min(100, pct(todayN, goal))}%"></i></div>
       <p>${st.current ? `${st.current}-day streak` : "Answer a question to start a streak"}</p></div></div>
