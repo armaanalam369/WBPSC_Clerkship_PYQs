@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1f2a5c">
+<title>WBPSC Clerkship PYQs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-view="loading">
+
+<header class="topbar">
+  <button class="brand" data-act="home" aria-label="Go to dashboard">WBPSC Clerkship <span>PYQs</span></button>
+  <nav class="topnav" aria-label="Main">
+    <button data-act="nav" data-view="dashboard">Dashboard</button>
+    <button data-act="nav" data-view="custom">Custom test</button>
+    <button data-act="nav" data-view="stats">Stats</button>
+    <button data-act="nav" data-view="saved">Saved</button>
+    <button data-act="nav" data-view="history">History</button>
+    <span class="nav-tools">
+      <button data-act="fontDown" aria-label="Smaller text" title="Smaller text">A−</button>
+      <button data-act="fontUp" aria-label="Larger text" title="Larger text">A+</button>
+      <button id="theme-toggle" data-act="theme" aria-label="Toggle theme">Dark</button>
+    </span>
+  </nav>
+</header>
+
+<div id="data-warning" class="banner hidden"></div>
+
+<main>
+
+  <!-- LOADING (skeleton) -->
+  <section id="view-loading" class="view">
+    <div class="skeleton tall"></div>
+    <div class="card-grid"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="view-dashboard" class="view hidden"><div id="dashboard-body"></div></section>
+
+  <!-- CUSTOM TEST -->
+  <section id="view-custom" class="view hidden">
+    <h2>Build a custom test</h2>
+    <div class="form-block wide">
+      <label>Papers <span class="linkset"><button class="link" data-act="chipsAll" data-target="custom-papers" data-v="1">all</button><button class="link" data-act="chipsAll" data-target="custom-papers" data-v="0">none</button></span></label>
+      <div id="custom-papers" class="chip-row"></div>
+    </div>
+    <div class="form-block wide">
+      <label>Sections <span class="linkset"><button class="link" data-act="chipsAll" data-target="custom-sections" data-v="1">all</button><button class="link" data-act="chipsAll" data-target="custom-sections" data-v="0">none</button></span></label>
+      <div id="custom-sections" class="chip-row"></div>
+    </div>
+    <div class="form-block wide">
+      <label>Difficulty</label>
+      <div id="custom-difficulty" class="chip-row"></div>
+    </div>
+    <div class="form-block">
+      <label for="custom-count">Number of questions</label>
+      <select id="custom-count">
+        <option value="10">10</option><option value="20">20</option><option value="25" selected>25</option>
+        <option value="50">50</option><option value="100">100</option><option value="all">All matching</option>
+      </select>
+    </div>
+    <button class="btn primary" data-act="startCustom">Continue</button>
+  </section>
+
+  <!-- TEST CONFIG -->
+  <section id="view-testconfig" class="view hidden">
+    <h2 id="config-title">Test</h2>
+    <p class="meta" id="config-meta"></p>
+    <div class="form-grid">
+      <div class="form-block">
+        <label for="config-mode">Mode</label>
+        <select id="config-mode">
+          <option value="exam">Exam: timed, scored at the end</option>
+          <option value="practice">Practice: instant feedback</option>
+        </select>
+      </div>
+      <div class="form-block">
+        <label for="config-count">Questions to include</label>
+        <input type="number" id="config-count" min="1" inputmode="numeric">
+      </div>
+      <div class="form-block">
+        <label for="config-order">Question order</label>
+        <select id="config-order"><option value="original">Original order</option><option value="random">Random order</option></select>
+      </div>
+      <div class="form-block">
+        <label for="timer-mode">Timer</label>
+        <select id="timer-mode">
+          <option value="none">No timer</option>
+          <option value="perTest">Whole test</option>
+          <option value="perQuestion">Per question</option>
+        </select>
+      </div>
+      <div class="form-block" id="timer-row">
+        <label for="timer-value" id="timer-label">Total minutes</label>
+        <input type="number" id="timer-value" min="1" inputmode="numeric">
+      </div>
+      <div class="form-block">
+        <label for="mark-correct">Marks per correct answer</label>
+        <input type="number" id="mark-correct" step="0.25" min="0" inputmode="decimal">
+      </div>
+      <div class="form-block">
+        <label for="mark-wrong">Negative marks per wrong answer</label>
+        <input type="number" id="mark-wrong" step="0.25" min="0" inputmode="decimal">
+      </div>
+    </div>
+    <div class="form-block checkbox-row"><label><input type="checkbox" id="config-shuffle"> Shuffle answer options</label></div>
+    <button class="btn primary" data-act="launch">Start test</button>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="view-quiz" class="view hidden">
+    <div class="quiz-header">
+      <span id="quiz-progress-label"></span>
+      <span class="quiz-header-right">
+        <span id="quiz-timer" class="timer" aria-live="off"></span>
+        <button class="btn small" data-act="focus" title="Focus mode">Focus</button>
+        <button class="btn small primary" data-act="submit">Submit</button>
+      </span>
+    </div>
+    <div class="progress-bar"><div id="quiz-progress-fill" class="progress-bar-fill"></div></div>
+    <div id="quiz-meta" class="chips-meta"></div>
+    <p id="quiz-question" class="quiz-question"></p>
+    <div id="quiz-options" class="options"></div>
+    <div id="quiz-feedback"></div>
+    <details id="note-wrap" class="note-wrap">
+      <summary>My note</summary>
+      <textarea id="note-box" rows="3" placeholder="Add a memory trick or reminder for this question"></textarea>
+    </details>
+    <div class="quiz-actions">
+      <button id="prev-btn" class="btn" data-act="prev">Previous</button>
+      <button id="clear-btn" class="btn" data-act="clear">Clear</button>
+      <button id="mark-btn" class="btn" data-act="mark">Mark</button>
+      <button id="bm-btn" class="btn" data-act="bm">Save</button>
+      <button id="next-btn" class="btn primary" data-act="next">Next</button>
+    </div>
+    <div id="quiz-nav-wrap">
+      <h3>Question palette</h3>
+      <div class="legend">
+        <span><i class="lg answered"></i>Answered</span><span><i class="lg notans"></i>Not answered</span>
+        <span><i class="lg unvisited"></i>Not visited</span><span><i class="lg marked"></i>Marked</span>
+        <span><i class="lg both"></i>Answered and marked</span>
+      </div>
+      <div id="quiz-nav" class="nav-grid"></div>
+      <p class="meta hint">Keys: 1–4 choose, N next, P previous, M mark, B save. On touch screens, swipe left or right.</p>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="view-results" class="view hidden">
+    <div class="print-head">WBPSC Clerkship PYQs — scorecard</div>
+    <h2 id="results-title"></h2>
+    <p id="results-sub" class="meta"></p>
+    <div id="results-overall" class="stat-grid"></div>
+    <p id="results-insight" class="insight"></p>
+    <div id="results-section-wrap" class="hidden"><h3>Section performance</h3><div class="table-scroll"><table id="results-section-table" class="data-table"></table></div></div>
+    <div id="results-paper-wrap" class="hidden"><h3>Paper performance</h3><div class="table-scroll"><table id="results-paper-table" class="data-table"></table></div></div>
+    <h3>Time per question</h3>
+    <div id="results-heat" class="heat-grid"></div>
+    <p class="meta">Darker means more time. Green outline: correct. Red outline: wrong.</p>
+    <div class="quiz-actions no-print">
+      <button class="btn primary" data-act="review">Review answers</button>
+      <button class="btn" data-act="retryWrong">Retry my mistakes</button>
+      <button class="btn" data-act="print">Print or save PDF</button>
+      <button class="btn" data-act="share">Share result</button>
+      <button class="btn" data-act="home">Dashboard</button>
+    </div>
+  </section>
+
+  <!-- REVIEW -->
+  <section id="view-review" class="view hidden">
+    <h2 id="review-title"></h2>
+    <div id="review-filters" class="chip-row no-print"></div>
+    <div id="review-list"></div>
+    <button class="btn no-print" data-act="home">Back to dashboard</button>
+  </section>
+
+  <!-- HISTORY -->
+  <section id="view-history" class="view hidden">
+    <h2>My attempts</h2>
+    <div class="quiz-actions">
+      <button class="btn" data-act="exportData">Export backup</button>
+      <button class="btn" data-act="importData">Import backup</button>
+      <button class="btn danger" data-act="clearHistory">Clear all progress</button>
+    </div>
+    <input type="file" id="import-file" accept="application/json" class="hidden">
+    <div id="history-list" class="card-grid"></div>
+  </section>
+
+  <!-- STATS -->
+  <section id="view-stats" class="view hidden"><div id="stats-body"></div></section>
+
+  <!-- SAVED -->
+  <section id="view-saved" class="view hidden"><div id="saved-body"></div></section>
+
+  <!-- DATA CHECK -->
+  <section id="view-datacheck" class="view hidden"><div id="datacheck-body"></div></section>
+
+</main>
+
+<footer class="foot no-print">
+  <button class="link" data-act="nav" data-view="datacheck">Check question data</button>
+</footer>
+
+<div id="modal" class="modal hidden"></div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+
+<script src="data/manifest.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
