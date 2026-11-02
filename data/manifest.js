@@ -8,9 +8,9 @@
 
 const PYQ_YEARS = [
    "2023_shift1",
-   "2023_shift2.js",
-   "2023_shift3.js",
-   "2023_shift4.js",
+   "2023_shift2",
+   "2023_shift3",
+   "2023_shift4",
   // "2019_shift1.js",
   // "2019_shift2.js",
   // "2019",
