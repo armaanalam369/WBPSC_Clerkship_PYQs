@@ -12,7 +12,7 @@ const PYQ_YEARS = [
    "2023_shift3",
    "2023_shift4",
    "2019_shift1",
-   "2019_shift2",
+//   "2019_shift2",
   // "2019",
   // "2022",
 ];
