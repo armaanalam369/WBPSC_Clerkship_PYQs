@@ -54,7 +54,9 @@ window.RULES = {
 window.SESSIONS = [
   { id: '2024-d1-s1', year: 2024, day: 1, shift: 1, date: '2024-02-10', file: 'data/2024-d1-s1.js' },
   { id: '2024-d1-s2', year: 2024, day: 1, shift: 2, date: '2024-02-10', file: 'data/2024-d1-s2.js' },
-  { id: '2023-d1-s1', year: 2023, day: 1, shift: 1, date: '2023-03-05', file: 'data/2023-d1-s1.js' }
+  { id: '2023-d1-s1', year: 2023, day: 1, shift: 1, date: '2023-03-05', file: 'data/2023-d1-s1.js' },
+  { id: '2019-d1-s1', year: 2019, day: 1, shift: 1, date: '2024-01-25', file: 'data/2019-d1-s1.js' },
+  { id: '2019-d1-s2', year: 2019, day: 1, shift: 2, date: '2023-01-25', file: 'data/2019-d1-s2.js' }
 ];
 
 /* ---- Motivational quotes (one per day) ---- */
