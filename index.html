@@ -9,7 +9,14 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="stylesheet" href="style.css">
+<style>/* safety net — style.css overrides all of this; it only matters if the stylesheet fails to load */
+:root{--bg:#080b1c;--bg2:#0e1330;--card:#121838;--tx:#eef0ff;--mu:#98a0c9;--bd:#262d57;--gl:#ffffff0a;--ink:#0a0d22;--a:#6d7bff;--b:#ffb547}
+body{background:var(--bg);color:var(--tx);font-family:system-ui,sans-serif;margin:0}
+.ov,.shade{display:none}.ov.show{display:grid}.shade.show{display:block}
+#sheet,#tools,#drawer,#dock{position:fixed}#sheet,#tools{left:0;right:0;bottom:-200vh}#drawer{top:0;right:-120vw}#sheet.show,#tools.show{bottom:0}#drawer.show{right:0}
+#cf{position:fixed;pointer-events:none}#toast{position:fixed;opacity:0}#toast.show{opacity:1}
+</style>
+<link rel="stylesheet" href="style.css?v=2">
 <script>/* apply saved theme before first paint (no flash) */
 try{var r=document.documentElement,t=localStorage.getItem('ck_p_theme'),p=localStorage.getItem('ck_p_pal');if(t)r.dataset.theme=JSON.parse(t);if(p)r.dataset.pal=JSON.parse(p)}catch(e){}</script>
 </head>
@@ -87,15 +94,15 @@ try{var r=document.documentElement,t=localStorage.getItem('ck_p_theme'),p=localS
 <canvas id="cf"></canvas><div id="toast" role="status" aria-live="polite"></div>
 
 <!-- 1) exam rules, topics, sessions -->
-<script src="data/manifest.js"></script>
+<script src="data/manifest.js?v=2"></script>
 <!-- 2) modules -->
-<script src="js/store.js"></script>
-<script src="js/util.js"></script>
-<script src="js/engine.js"></script>
-<script src="js/charts.js"></script>
-<script src="js/tools.js"></script>
-<script src="js/card.js"></script>
-<script src="js/analysis.js"></script>
-<script src="js/app.js"></script>
+<script src="js/store.js?v=2"></script>
+<script src="js/util.js?v=2"></script>
+<script src="js/engine.js?v=2"></script>
+<script src="js/charts.js?v=2"></script>
+<script src="js/tools.js?v=2"></script>
+<script src="js/card.js?v=2"></script>
+<script src="js/analysis.js?v=2"></script>
+<script src="js/app.js?v=2"></script>
 </body>
 </html>
