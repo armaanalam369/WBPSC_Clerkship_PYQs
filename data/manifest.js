@@ -52,8 +52,8 @@ window.RULES = {
 
 /* ---- Sessions: year → day → shift ---- */
 window.SESSIONS = [
-  { id: '2024-d1-s1', year: 2024, day: 1, shift: 1, date: '2024-02-10', file: 'data/2024-d1-s1.js' },
-  { id: '2024-d1-s2', year: 2024, day: 1, shift: 2, date: '2024-02-10', file: 'data/2024-d1-s2.js' },
+  //{ id: '2024-d1-s1', year: 2024, day: 1, shift: 1, date: '2024-02-10', file: 'data/2024-d1-s1.js' },
+  //{ id: '2024-d1-s2', year: 2024, day: 1, shift: 2, date: '2024-02-10', file: 'data/2024-d1-s2.js' },
   { id: '2023-d1-s1', year: 2023, day: 1, shift: 1, date: '2023-11-16', file: 'data/2023-d1-s1.js' },
   { id: '2023-d1-s2', year: 2023, day: 1, shift: 2, date: '2023-11-16', file: 'data/2023-d1-s2.js' },
   { id: '2023-d2-s1', year: 2023, day: 1, shift: 1, date: '2023-11-17', file: 'data/2023-d2-s1.js' },
