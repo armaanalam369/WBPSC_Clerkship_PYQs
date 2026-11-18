@@ -3,7 +3,7 @@
    WBPSC Clerkship Examination (Preliminary) 2023 — 1st Shift
    100 questions formatted for Wise Choice PWA platform.
    ===================================================================== */
-(window.PAPERS = window.PAPERS || {})['2023_d1_s1'] = {
+(window.PAPERS = window.PAPERS || {})['2023-d1-s1'] = {
   questions: [
     {
         "s": "English",
